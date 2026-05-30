@@ -1,7 +1,1 @@
 title,url,description,tags
-FortiAppSec Cloud Overview,https://docs.fortinet.com/product/fortiappsec,High-level architecture and feature overview of the FortiAppSec Cloud platform.,overview;getting-started
-API Security,https://docs.fortinet.com/product/fortiappsec,Automated API discovery, schema validation, and runtime threat protection.,api;security
-Bot Management,https://docs.fortinet.com/product/fortiappsec,Identify and mitigate malicious bots while allowing legitimate traffic.,bot;waf
-OWASP Top 10 Protection,https://docs.fortinet.com/product/fortiappsec,Built-in rule sets covering all OWASP Top 10 web application vulnerabilities.,owasp;waf;compliance
-DDoS Mitigation,https://docs.fortinet.com/product/fortiappsec,Volumetric and application-layer DDoS protection with automatic rate limiting.,ddos;protection
-Dashboard & Analytics,https://docs.fortinet.com/product/fortiappsec,Real-time traffic insights and security event monitoring from a central dashboard.,analytics;monitoring
