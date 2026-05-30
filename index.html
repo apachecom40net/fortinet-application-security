@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fortinet Docs Hub</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .card { transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease; }
+    .card:hover { transform: translateY(-2px); }
+    .tab-btn { transition: color .15s, border-color .15s; }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #0f172a; }
+    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #475569; }
+    .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .line-clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen">
+
+  <!-- Sticky header -->
+  <header class="sticky top-0 z-20 bg-slate-900/95 backdrop-blur-sm border-b border-slate-800">
+
+    <!-- Top bar -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 flex items-center gap-3 h-14">
+
+      <!-- Brand -->
+      <div class="flex items-center gap-2 shrink-0">
+        <svg class="w-7 h-7" viewBox="0 0 32 32" fill="none">
+          <path fill="#DA291C" d="M16 2L4 7v9c0 8 5.5 14 12 15 6.5-1 12-7 12-15V7L16 2z"/>
+          <polyline points="10,16 14,20 22,12" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        </svg>
+        <span class="font-bold text-white text-base tracking-tight">
+          Fortinet <span class="text-red-500">Docs</span>
+        </span>
+      </div>
+
+      <div class="flex-1"></div>
+
+      <!-- Count badge -->
+      <span id="count-badge" class="text-xs text-slate-500 shrink-0 hidden"></span>
+
+      <!-- Search -->
+      <div class="relative w-44 sm:w-60">
+        <svg class="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-500 pointer-events-none"
+             fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z"/>
+        </svg>
+        <input id="search" type="search" placeholder="Filter docs…"
+          class="w-full bg-slate-800 border border-slate-700 rounded-lg pl-8 pr-3 py-1.5 text-sm
+                 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-red-600
+                 focus:ring-1 focus:ring-red-600">
+      </div>
+    </div>
+
+    <!-- Product tabs -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 overflow-x-auto">
+      <nav id="tabs" class="flex whitespace-nowrap"></nav>
+    </div>
+  </header>
+
+  <!-- Main content -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 py-6">
+
+    <!-- Product subtitle -->
+    <div id="product-header" class="mb-5 hidden">
+      <h2 id="product-title" class="text-lg font-semibold text-white"></h2>
+      <p id="product-desc" class="text-sm text-slate-400 mt-0.5"></p>
+    </div>
+
+    <!-- Loading -->
+    <div id="loading"
+         class="flex flex-col items-center justify-center py-24 text-slate-500">
+      <svg class="animate-spin w-8 h-8 mb-3 text-red-600" fill="none" viewBox="0 0 24 24">
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/>
+        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/>
+      </svg>
+      <span class="text-sm">Loading documentation…</span>
+    </div>
+
+    <!-- Doc grid -->
+    <div id="grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+         style="display:none"></div>
+
+    <!-- Empty state -->
+    <div id="empty" class="flex flex-col items-center justify-center py-24 text-slate-500"
+         style="display:none">
+      <svg class="w-12 h-12 mb-3 opacity-30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+              d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+      </svg>
+      <span class="text-sm">No matching docs found</span>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-slate-800 mt-12 py-4 text-center text-xs text-slate-600">
+    Fortinet Docs Hub &mdash; content from <code class="text-slate-500">data/*.csv</code>
+  </footer>
+
+  <script>
+    // ─── Product definitions ──────────────────────────────────────────────────
+    const PRODUCTS = [
+      {
+        id: 'fortiappsec',
+        name: 'FortiAppSec',
+        file: 'data/fortiappsec.csv',
+        desc: 'App security, WAF & bot protection in the cloud',
+      },
+      {
+        id: 'fortiweb',
+        name: 'FortiWeb',
+        file: 'data/fortiweb.csv',
+        desc: 'Web Application Firewall for on-prem and cloud deployments',
+      },
+      {
+        id: 'fortiadc',
+        name: 'FortiADC',
+        file: 'data/fortiadc.csv',
+        desc: 'Application Delivery Controller & load balancing',
+      },
+      {
+        id: 'forticnapp',
+        name: 'FortiCNAPP',
+        file: 'data/forticnapp.csv',
+        desc: 'Cloud-Native Application Protection Platform',
+      },
+      {
+        id: 'forticasb',
+        name: 'FortiCASB SSPM',
+        file: 'data/forticasb-sspm.csv',
+        desc: 'Cloud Access Security Broker & SaaS Security Posture Management',
+      },
+    ];
+
+    let currentData = [];
+    let active = PRODUCTS[0];
+
+    // ─── CSV parser ───────────────────────────────────────────────────────────
+    function splitLine(line) {
+      const out = [];
+      let cur = '', inQ = false;
+      for (let i = 0; i < line.length; i++) {
+        const c = line[i];
+        if (c === '"') {
+          if (inQ && line[i + 1] === '"') { cur += '"'; i++; }
+          else inQ = !inQ;
+        } else if (c === ',' && !inQ) {
+          out.push(cur); cur = '';
+        } else {
+          cur += c;
+        }
+      }
+      out.push(cur);
+      return out;
+    }
+
+    function parseCSV(text) {
+      const lines = text.trim().split('\n').map(l => l.replace(/\r$/, ''));
+      if (lines.length < 2) return [];
+      const headers = splitLine(lines[0]).map(h => h.trim());
+      return lines.slice(1)
+        .filter(l => l.trim())
+        .map(l => {
+          const vals = splitLine(l);
+          return Object.fromEntries(
+            headers.map((h, i) => [h, (vals[i] ?? '').trim()])
+          );
+        });
+    }
+
+    // ─── Card template ────────────────────────────────────────────────────────
+    function renderCard(doc) {
+      const tags = (doc.tags || '').split(';').map(t => t.trim()).filter(Boolean);
+      const tagHTML = tags.map(t =>
+        `<span class="px-2 py-0.5 text-xs rounded-full bg-slate-800 text-slate-400 border border-slate-700/60">${t}</span>`
+      ).join('');
+
+      return `
+        <a href="${doc.url || '#'}" target="_blank" rel="noopener noreferrer"
+           class="card group flex flex-col gap-3 p-4 rounded-xl bg-slate-900 border border-slate-800
+                  hover:border-red-600/50 hover:shadow-xl hover:shadow-red-950/30 no-underline">
+          <div class="flex items-start justify-between gap-3">
+            <h3 class="text-sm font-semibold text-slate-100 group-hover:text-red-400 leading-snug line-clamp-2">
+              ${doc.title || 'Untitled'}
+            </h3>
+            <svg class="shrink-0 w-3.5 h-3.5 mt-0.5 text-slate-600 group-hover:text-red-500 transition-colors"
+                 fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+            </svg>
+          </div>
+          ${doc.description
+            ? `<p class="text-xs text-slate-400 leading-relaxed line-clamp-3">${doc.description}</p>`
+            : ''}
+          ${tagHTML
+            ? `<div class="flex flex-wrap gap-1.5 mt-auto pt-1">${tagHTML}</div>`
+            : ''}
+        </a>`;
+    }
+
+    // ─── Grid rendering with filter ───────────────────────────────────────────
+    function renderGrid(filter) {
+      const grid  = document.getElementById('grid');
+      const empty = document.getElementById('empty');
+      const badge = document.getElementById('count-badge');
+      const q = (filter || '').trim().toLowerCase();
+
+      const filtered = q
+        ? currentData.filter(d =>
+            (d.title       || '').toLowerCase().includes(q) ||
+            (d.description || '').toLowerCase().includes(q) ||
+            (d.tags        || '').toLowerCase().includes(q))
+        : currentData;
+
+      badge.textContent = `${filtered.length} doc${filtered.length !== 1 ? 's' : ''}`;
+      badge.classList.toggle('hidden', filtered.length === 0);
+
+      if (filtered.length === 0) {
+        grid.style.display  = 'none';
+        empty.style.display = 'flex';
+      } else {
+        empty.style.display = 'none';
+        grid.style.display  = 'grid';
+        grid.innerHTML = filtered.map(renderCard).join('');
+      }
+    }
+
+    // ─── Load a product's CSV ─────────────────────────────────────────────────
+    async function loadProduct(product) {
+      const loading = document.getElementById('loading');
+      const grid    = document.getElementById('grid');
+      const empty   = document.getElementById('empty');
+
+      grid.style.display    = 'none';
+      empty.style.display   = 'none';
+      loading.style.display = 'flex';
+
+      document.getElementById('product-title').textContent = product.name;
+      document.getElementById('product-desc').textContent  = product.desc;
+      document.getElementById('product-header').classList.remove('hidden');
+
+      try {
+        const res = await fetch(`${product.file}?_=${Date.now()}`);
+        if (!res.ok) throw new Error('not found');
+        currentData = parseCSV(await res.text());
+      } catch {
+        currentData = [];
+      }
+
+      loading.style.display = 'none';
+      renderGrid(document.getElementById('search').value);
+    }
+
+    // ─── Tab bar ──────────────────────────────────────────────────────────────
+    function buildTabs() {
+      const nav = document.getElementById('tabs');
+      nav.innerHTML = PRODUCTS.map(p => {
+        const on = p.id === active.id;
+        return `
+          <button class="tab-btn shrink-0 px-4 py-3 text-sm font-medium border-b-2 whitespace-nowrap
+            ${on
+              ? 'text-white border-red-600'
+              : 'text-slate-400 border-transparent hover:text-slate-200 hover:border-slate-600'}"
+            data-id="${p.id}">${p.name}
+          </button>`;
+      }).join('');
+
+      nav.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          active = PRODUCTS.find(p => p.id === btn.dataset.id);
+          document.getElementById('search').value = '';
+          buildTabs();
+          loadProduct(active);
+        });
+      });
+    }
+
+    // ─── Search listener ──────────────────────────────────────────────────────
+    document.getElementById('search').addEventListener('input', e => {
+      renderGrid(e.target.value);
+    });
+
+    // ─── Boot ─────────────────────────────────────────────────────────────────
+    buildTabs();
+    loadProduct(active);
+  </script>
+</body>
+</html>

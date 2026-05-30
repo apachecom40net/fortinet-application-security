@@ -1,0 +1,7 @@
+title,url,description,tags
+FortiCASB SSPM Overview,https://docs.fortinet.com/product/forticasb,Introduction to Cloud Access Security Broker and SaaS Security Posture Management.,overview;getting-started
+SaaS Visibility & Control,https://docs.fortinet.com/product/forticasb,Discover sanctioned and shadow SaaS usage across your organization.,visibility;shadow-it
+Data Loss Prevention,https://docs.fortinet.com/product/forticasb,Inspect and protect sensitive data shared via cloud applications like Microsoft 365 and Google Workspace.,dlp;compliance;data
+Threat Protection for SaaS,https://docs.fortinet.com/product/forticasb,Detect account compromise, insider threats, and malware within SaaS platforms.,threat;detection
+Security Posture Assessment,https://docs.fortinet.com/product/forticasb,Benchmark SaaS configurations against CIS and NIST controls and auto-remediate drift.,sspm;posture;compliance
+Zero Trust Access Policies,https://docs.fortinet.com/product/forticasb,Enforce adaptive access policies based on user identity, device posture, and location.,ztna;access;policy

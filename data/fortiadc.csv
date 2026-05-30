@@ -1,0 +1,7 @@
+title,url,description,tags
+FortiADC Overview,https://docs.fortinet.com/product/fortiadc,Architecture overview of FortiADC application delivery and load balancing capabilities.,overview;getting-started
+Load Balancing Methods,https://docs.fortinet.com/product/fortiadc,Configure round-robin, least-connection, and weighted load balancing for server pools.,load-balancing
+Global Server Load Balancing,https://docs.fortinet.com/product/fortiadc,Multi-site GSLB with DNS-based traffic steering and health checks.,gslb;dns
+Web Application Firewall,https://docs.fortinet.com/product/fortiadc,Integrated WAF policies for application-layer threat protection.,waf;security
+SSL Offloading,https://docs.fortinet.com/product/fortiadc,Offload TLS termination to FortiADC to reduce backend server load.,ssl;performance
+Link Load Balancing,https://docs.fortinet.com/product/fortiadc,Distribute outbound traffic across multiple ISP links for redundancy and bandwidth.,llb;network

@@ -1,0 +1,7 @@
+title,url,description,tags
+Getting Started with FortiWeb,https://docs.fortinet.com/product/fortiweb,Initial setup and deployment guide for FortiWeb hardware and VM editions.,getting-started;setup
+WAF Policies & Rules,https://docs.fortinet.com/product/fortiweb,Create and manage WAF policies using signature-based and custom rules.,waf;policy
+SSL/TLS Inspection,https://docs.fortinet.com/product/fortiweb,Configure SSL offloading and full inspection for encrypted traffic.,ssl;tls;encryption
+Machine Learning Anomaly Detection,https://docs.fortinet.com/product/fortiweb,Train ML models to detect zero-day and anomalous HTTP requests automatically.,ml;anomaly;ai
+API Gateway & Protection,https://docs.fortinet.com/product/fortiweb,Secure REST and SOAP APIs with schema enforcement and rate limiting.,api;gateway
+High Availability Clustering,https://docs.fortinet.com/product/fortiweb,Configure active-passive and active-active HA for FortiWeb appliances.,ha;clustering;availability

@@ -1,0 +1,7 @@
+title,url,description,tags
+FortiCNAPP Introduction,https://docs.fortinet.com/product/forticnapp,Overview of the Cloud-Native Application Protection Platform and its unified security model.,overview;cloud
+Cloud Security Posture Management,https://docs.fortinet.com/product/forticnapp,Continuously assess and remediate misconfigurations across AWS, Azure, and GCP.,cspm;posture;compliance
+Workload Protection,https://docs.fortinet.com/product/forticnapp,Runtime protection for containers, VMs, and serverless functions in cloud environments.,cwpp;runtime;containers
+Infrastructure as Code Scanning,https://docs.fortinet.com/product/forticnapp,Shift-left scanning of Terraform, CloudFormation, and Kubernetes manifests.,iac;devsecops;scanning
+Kubernetes Security,https://docs.fortinet.com/product/forticnapp,Admission control, network policy enforcement, and runtime monitoring for Kubernetes clusters.,kubernetes;containers
+Threat Detection & Response,https://docs.fortinet.com/product/forticnapp,Correlate cloud telemetry and alert on active threats with guided remediation.,detection;response;soc
