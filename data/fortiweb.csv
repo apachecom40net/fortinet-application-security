@@ -1,5 +1,4 @@
 title,url,description,tags
-Title,url,description,tags
 FortiWeb 8.0,https://docs.fortinet.com/product/fortiweb/8.0,"Main FortiWeb product documentation hub with version selector and links to guides, reference manuals, and release notes.","product;landing;page"
 Documentation Index,https://docs.fortinet.com/document/fortiweb/8.0.5/administration-guide/337720/documentation,"Central documentation index for FortiWeb 8.0.5, including onboarding guides, solution guides, use cases, and feature docs.","index;admin-guide;solutions"
 WAF Concept Guide,https://docs.fortinet.com/document/fortiweb/8.0.5/administration-guide/337720/documentation,"Introductory guide covering WAF concepts and FortiWeb core features.","getting-started;waf;concepts"
