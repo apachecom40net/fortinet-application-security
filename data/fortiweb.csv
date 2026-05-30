@@ -1,7 +1,12 @@
 title,url,description,tags
-Getting Started with FortiWeb,https://docs.fortinet.com/product/fortiweb,Initial setup and deployment guide for FortiWeb hardware and VM editions.,getting-started;setup
-WAF Policies & Rules,https://docs.fortinet.com/product/fortiweb,Create and manage WAF policies using signature-based and custom rules.,waf;policy
-SSL/TLS Inspection,https://docs.fortinet.com/product/fortiweb,Configure SSL offloading and full inspection for encrypted traffic.,ssl;tls;encryption
-Machine Learning Anomaly Detection,https://docs.fortinet.com/product/fortiweb,Train ML models to detect zero-day and anomalous HTTP requests automatically.,ml;anomaly;ai
-API Gateway & Protection,https://docs.fortinet.com/product/fortiweb,Secure REST and SOAP APIs with schema enforcement and rate limiting.,api;gateway
-High Availability Clustering,https://docs.fortinet.com/product/fortiweb,Configure active-passive and active-active HA for FortiWeb appliances.,ha;clustering;availability
+Title,url,description,tags
+FortiWeb 8.0,https://docs.fortinet.com/product/fortiweb/8.0,"Main FortiWeb product documentation hub with version selector and links to guides, reference manuals, and release notes.","product;landing;page"
+Documentation Index,https://docs.fortinet.com/document/fortiweb/8.0.5/administration-guide/337720/documentation,"Central documentation index for FortiWeb 8.0.5, including onboarding guides, solution guides, use cases, and feature docs.","index;admin-guide;solutions"
+WAF Concept Guide,https://docs.fortinet.com/document/fortiweb/8.0.5/administration-guide/337720/documentation,"Introductory guide covering WAF concepts and FortiWeb core features.","getting-started;waf;concepts"
+WAF Network Architecture Guide,https://docs.fortinet.com/document/fortiweb/8.0.5/administration-guide/337720/documentation,"Explains deployment architectures, traffic flow, topology placement, and HA modes.","architecture;deployment;ha"
+Administration Guide,https://docs.fortinet.com/document/fortiweb/8.0.5/administration-guide/337720/documentation,"Detailed configuration reference for FortiWeb features and parameters.","admin;configuration;reference"
+FortiWeb CLI Reference,https://docs.fortinet.com/product/fortiweb/8.0,"CLI reference entry listed under the FortiWeb product page.","cli;reference;admin"
+FortiWeb Release Notes,https://docs.fortinet.com/product/fortiweb/8.0,"Release notes entry for FortiWeb versions and updates.","release-notes;updates;versioning"
+WAF Solutions against OWASP Top 10 Risks,https://docs.fortinet.com/document/fortiweb/8.0.5/administration-guide/337720/documentation,"Solution guide mapping FortiWeb configuration to OWASP Top 10 web app risks.","owasp;waf;security"
+WAF Solutions against OWASP Top 10 API Security Risks,https://docs.fortinet.com/document/fortiweb/8.0.5/administration-guide/337720/documentation,"Guide for protecting APIs against OWASP API security risks.","api-security;owasp;waf"
+WAF Solutions against Bot Attacks,https://docs.fortinet.com/document/fortiweb/8.0.5/administration-guide/337720/documentation,"Configuration guidance for detecting and blocking bot attacks.","bot-protection;abuse;security"
