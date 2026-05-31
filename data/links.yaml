@@ -1,0 +1,63 @@
+fortiappsec:
+  tools:
+    - label: Cloud Console
+      url: https://portal.appsec.fortinet.com/main/home
+    - label: Service Status
+      url: https://status.appsec.fortinet.com/
+  demos:
+    - label: FortiAppSec Demo
+      url: https://www.fortinet.com/demo-center/fortiappsec-demo
+
+fortiweb:
+  tools:
+    - label: FortiWeb Cloud
+      url: https://fortiweb-cloud.com/
+    - label: Free Trial
+      url: https://www.fortinet.com/products/web-application-firewall/fortiweb
+  demos:
+    - label: FortiWeb Demo
+      url: https://www.fortinet.com/demo-center/fortiweb-demo
+
+fortiadc:
+  tools:
+    - label: FortiCloud
+      url: https://www.forticloud.com
+    - label: Support Portal
+      url: https://support.fortinet.com/welcome/
+  demos:
+    - label: FortiADC Demo
+      url: https://www.fortinet.com/demo-center/fortiadc-demo
+
+forticnapp:
+  tools:
+    - label: CNAPP Console
+      url: https://www.fortinet.com/products/forticnapp
+    - label: FortiCloud Login
+      url: https://www.forticloud.com
+  demos:
+    - label: FortiCNAPP Demo
+      url: https://www.fortinet.com/demo-center/forticnapp-demo
+
+forticasb:
+  tools:
+    - label: FortiCASB Portal
+      url: https://www.forticasb.com/
+    - label: Support Portal
+      url: https://support.fortinet.com/welcome/
+  demos:
+    - label: FortiCASB Overview
+      url: https://video.fortinet.com/products/forticasb-sspm/General/forticasb-sspm-overview
+    - label: Documentation
+      url: https://docs.fortinet.com/product/forticasb-sspm
+
+fortisase:
+  tools:
+    - label: FortiSASE Portal
+      url: https://portal.prod.fortisase.com
+    - label: FortiCloud Assets
+      url: https://support.fortinet.com/asset/
+  demos:
+    - label: FortiSASE SIA Demo
+      url: https://video.fortinet.com/watch/499
+    - label: Documentation
+      url: https://docs.fortinet.com/product/fortisase

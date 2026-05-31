@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Fortinet Docs Hub</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/js-yaml@4/dist/js-yaml.min.js"></script>
   <style>
     .card { transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease; }
     .card:hover { transform: translateY(-2px); }
@@ -125,78 +126,12 @@
   <script>
     // ─── Product definitions ──────────────────────────────────────────────────
     const PRODUCTS = [
-      {
-        id: 'fortiappsec',
-        name: 'FortiAppSec',
-        file: 'data/fortiappsec.csv',
-        desc: 'App security, WAF & bot protection in the cloud',
-        tools: [
-          { label: 'Cloud Console', url: 'https://portal.appsec.fortinet.com/main/home' },
-          { label: 'Service Status', url: 'https://status.appsec.fortinet.com/' },
-        ],
-        demos: [{ label: 'FortiAppSec Demo', url: 'https://www.fortinet.com/demo-center/fortiappsec-demo' }],
-      },
-      {
-        id: 'fortiweb',
-        name: 'FortiWeb',
-        file: 'data/fortiweb.csv',
-        desc: 'Web Application Firewall for on-prem and cloud deployments',
-        tools: [
-          { label: 'FortiWeb Cloud', url: 'https://fortiweb-cloud.com/' },
-          { label: 'Free Trial', url: 'https://www.fortinet.com/products/web-application-firewall/fortiweb' },
-        ],
-        demos: [{ label: 'FortiWeb Demo', url: 'https://www.fortinet.com/demo-center/fortiweb-demo' }],
-      },
-      {
-        id: 'fortiadc',
-        name: 'FortiADC',
-        file: 'data/fortiadc.csv',
-        desc: 'Application Delivery Controller & load balancing',
-        tools: [
-          { label: 'FortiCloud', url: 'https://www.forticloud.com' },
-          { label: 'Support Portal', url: 'https://support.fortinet.com/welcome/' },
-        ],
-        demos: [{ label: 'FortiADC Demo', url: 'https://www.fortinet.com/demo-center/fortiadc-demo' }],
-      },
-      {
-        id: 'forticnapp',
-        name: 'FortiCNAPP',
-        file: 'data/forticnapp.csv',
-        desc: 'Cloud-Native Application Protection Platform',
-        tools: [
-          { label: 'CNAPP Console', url: 'https://www.fortinet.com/products/forticnapp' },
-          { label: 'FortiCloud Login', url: 'https://www.forticloud.com' },
-        ],
-        demos: [{ label: 'FortiCNAPP Demo', url: 'https://www.fortinet.com/demo-center/forticnapp-demo' }],
-      },
-      {
-        id: 'forticasb',
-        name: 'FortiCASB SSPM',
-        file: 'data/forticasb-sspm.csv',
-        desc: 'Cloud Access Security Broker & SaaS Security Posture Management',
-        tools: [
-          { label: 'FortiCASB Portal', url: 'https://www.forticasb.com/' },
-          { label: 'Support Portal', url: 'https://support.fortinet.com/welcome/' },
-        ],
-        demos: [
-          { label: 'FortiCASB Overview', url: 'https://video.fortinet.com/products/forticasb-sspm/General/forticasb-sspm-overview' },
-          { label: 'Documentation', url: 'https://docs.fortinet.com/product/forticasb-sspm' },
-        ],
-      },
-      {
-        id: 'fortisase',
-        name: 'FortiSASE',
-        file: 'data/fortisase.csv',
-        desc: 'Secure Access Service Edge — cloud-delivered security and networking',
-        tools: [
-          { label: 'FortiSASE Portal', url: 'https://portal.prod.fortisase.com' },
-          { label: 'FortiCloud Assets', url: 'https://support.fortinet.com/asset/' },
-        ],
-        demos: [
-          { label: 'FortiSASE SIA Demo', url: 'https://video.fortinet.com/watch/499' },
-          { label: 'Documentation', url: 'https://docs.fortinet.com/product/fortisase' },
-        ],
-      },
+      { id: 'fortiappsec', name: 'FortiAppSec',    file: 'data/fortiappsec.csv',     desc: 'App security, WAF & bot protection in the cloud' },
+      { id: 'fortiweb',   name: 'FortiWeb',       file: 'data/fortiweb.csv',        desc: 'Web Application Firewall for on-prem and cloud deployments' },
+      { id: 'fortiadc',   name: 'FortiADC',       file: 'data/fortiadc.csv',        desc: 'Application Delivery Controller & load balancing' },
+      { id: 'forticnapp', name: 'FortiCNAPP',     file: 'data/forticnapp.csv',      desc: 'Cloud-Native Application Protection Platform' },
+      { id: 'forticasb',  name: 'FortiCASB SSPM', file: 'data/forticasb-sspm.csv',  desc: 'Cloud Access Security Broker & SaaS Security Posture Management' },
+      { id: 'fortisase',  name: 'FortiSASE',      file: 'data/fortisase.csv',       desc: 'Secure Access Service Edge — cloud-delivered security and networking' },
     ];
 
     let currentData = [];
@@ -366,14 +301,34 @@
       });
     }
 
+    // ─── Load links.yaml ─────────────────────────────────────────────────────
+    async function loadLinks() {
+      try {
+        const res = await fetch(`data/links.yaml?_=${Date.now()}`);
+        if (!res.ok) throw new Error('not found');
+        const data = jsyaml.load(await res.text());
+        PRODUCTS.forEach(p => {
+          if (data[p.id]) {
+            p.tools = data[p.id].tools || [];
+            p.demos = data[p.id].demos || [];
+          }
+        });
+      } catch {
+        // YAML unavailable — footer bar stays empty
+      }
+    }
+
     // ─── Search listener ──────────────────────────────────────────────────────
     document.getElementById('search').addEventListener('input', e => {
       renderGrid(e.target.value);
     });
 
     // ─── Boot ─────────────────────────────────────────────────────────────────
-    buildTabs();
-    loadProduct(active);
+    (async () => {
+      await loadLinks();
+      buildTabs();
+      loadProduct(active);
+    })();
   </script>
 </body>
 </html>
